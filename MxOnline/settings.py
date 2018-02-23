@@ -105,15 +105,6 @@ DATABASES = {
         'HOST': '127.0.0.1'
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'MxOnline',
-#         'USER': 'anderson',
-#         'PASSWORD': 'anderson',
-#         'HOST': 'mxonline.cdtm4kxrzceq.ap-northeast-1.rds.amazonaws.com'
-#     }
-# }
 
 
 # Password validation
