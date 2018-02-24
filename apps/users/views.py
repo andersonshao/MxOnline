@@ -249,7 +249,7 @@ class FavTeacherView(LoginRequiredMixin, View):
 
 class MyMessageView(LoginRequiredMixin, View):
     def get(self, request):
-        all_messages = UserMessage.objects.all()
+        all_messages = UserMessage.objects.filter(user=request.user.id)
 
         try:
             page = request.GET.get('page', 1)
@@ -260,7 +260,7 @@ class MyMessageView(LoginRequiredMixin, View):
 
         page_obj = p.page(page)
 
-        for user_message in UserMessage.objects.filter(user__in=[0, request.user.id], has_read=False):
+        for user_message in all_messages.filter(has_read=False):
             user_message.has_read = True
             user_message.save()
 
