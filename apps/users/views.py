@@ -83,6 +83,9 @@ class RegisterView(View):
             username = request.POST.get('email', '')
             if UserProfile.objects.filter(email=username):
                 return render(request, 'register.html', {'register_form': register_form, 'msg': '用户已存在'})
+
+            send_register_email(username, 'register')
+
             password = request.POST.get('password', '')
             user = UserProfile()
             user.email = username
@@ -93,7 +96,6 @@ class RegisterView(View):
             # 欢迎注册的消息
             UserMessage.objects.create(user=user.id, message='欢迎注册', has_read=False)
 
-            send_register_email(username, 'register')
             return render(request, 'login.html')
 
         else:
