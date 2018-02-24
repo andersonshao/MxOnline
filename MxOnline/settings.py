@@ -157,6 +157,10 @@ EMAIL_HOST_PASSWORD = 'sp.3214'
 EMAIL_USE_TLS = False
 EMAIL_FROM = '18036233180@163.com'
 
+ADMINS=(
+'anderson', 'sp726129246@gmail.com',
+)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
