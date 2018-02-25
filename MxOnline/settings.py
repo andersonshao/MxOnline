@@ -146,15 +146,13 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '18036233180@163.com'
 EMAIL_HOST_PASSWORD = 'sp.3214'
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = True
 EMAIL_FROM = EMAIL_HOST_USER
 
 ADMINS=(
