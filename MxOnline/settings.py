@@ -26,9 +26,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = '$-7ncg9w@fm(i1hi)cb^jst!yf9s12s@vqjppp9uq(&7fs73ik'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.andersonshao.com', '13.113.154.35']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -96,12 +96,22 @@ WSGI_APPLICATION = 'MxOnline.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mxonline',
+#         'USER': 'anderson',
+#         'PASSWORD': 'anderson',
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mxonline',
-        'USER': 'anderson',
-        'PASSWORD': 'anderson',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost'
     }
 }
@@ -146,20 +156,21 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sp726129246@gmail.com'
-EMAIL_HOST_PASSWORD = 'Anderson515'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_FROM = EMAIL_HOST_USER
 
-ADMINS=(
-'anderson', 'sp726129246@gmail.com',
+ADMINS = (
+    'anderson', 'sp726129246@gmail.com',
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
