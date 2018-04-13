@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'captcha',
     'pure_pagination',
     'DjangoUeditor',
+    'raven.contrib.django.raven_compat',
 
 ]
 
@@ -174,3 +175,13 @@ ADMINS = (
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+import os
+import raven
+
+RAVEN_CONFIG = {
+    'dsn': 'http://865402817fec4de18781f12827477427:09a17e54cd9e45baabde4c5e8702c30d@111.231.111.100:9000/4',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    # 'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
