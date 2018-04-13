@@ -2,8 +2,9 @@ from random import Random
 
 from django.core.mail import send_mail
 
-from users.models import EmailVerifyRecord
+from .models import EmailVerifyRecord
 from MxOnline.settings import EMAIL_FROM
+from MxOnline import celery_app
 
 
 def random_str(random_length=8):
@@ -16,6 +17,7 @@ def random_str(random_length=8):
     return s
 
 
+@celery_app.task
 def send_register_email(email, send_type='register'):
     code = random_str()
     if send_type == 'sendemail_code':
@@ -44,5 +46,3 @@ def send_register_email(email, send_type='register'):
         send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
         if send_status:
             pass
-
-

@@ -1,2 +1,1 @@
-## django+xadmin实现小型MOOC
-已部署在 [andersonshao.com](http://andersonshao.com)
+# 小伙伴盗用了我的邮箱,调皮.

@@ -10,13 +10,18 @@ from django.http import HttpResponse, HttpResponseRedirect
 from pure_pagination import Paginator, PageNotAnInteger
 from django.core.urlresolvers import reverse
 
-from .models import UserProfile, EmailVerifyRecord, Banner
-from .forms import LoginForm, RegisterForm, ForgetForm, ModifyForm, ImageUploadForm, UserInfoForm
-from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
 from operation.models import UserCourse, UserFavorite, UserMessage
 from courses.models import Course
 from organization.models import CourseOrg, Teacher
+from .models import UserProfile, EmailVerifyRecord, Banner
+from .forms import LoginForm, RegisterForm, ForgetForm, ModifyForm, ImageUploadForm, UserInfoForm
+from .tasks import send_register_email
+
+
+# def index(request):
+#     send_register_email.delay()
+#     return HttpResponse('邮件发送成功,请查收')
 
 
 class CustomBackends(ModelBackend):
@@ -84,7 +89,7 @@ class RegisterView(View):
             if UserProfile.objects.filter(email=username):
                 return render(request, 'register.html', {'register_form': register_form, 'msg': '用户已存在'})
 
-            send_register_email(username, 'register')
+            send_register_email.delay(username, 'register')
 
             password = request.POST.get('password', '')
             user = UserProfile()
@@ -111,7 +116,7 @@ class ForgetPwdView(View):
         forget_form = ForgetForm(request.POST)
         if forget_form.is_valid():
             email = request.POST.get('email', '')
-            send_register_email(email, 'forget')
+            send_register_email.delay(email, 'forget')
             return render(request, 'send_success.html')
         else:
             return render(request, 'forgetpwd.html', {'forget_form': forget_form})
@@ -188,7 +193,7 @@ class SendEmailCodeView(LoginRequiredMixin, View):
         if UserProfile.objects.filter(email=email):
             return HttpResponse('{"msg": "邮箱已存在"}', content_type='application/json')
         else:
-            send_register_email(email, 'sendemail_code')
+            send_register_email.delay(email, 'sendemail_code')
             return HttpResponse('{"status": "success"}', content_type='application/json')
 
 
